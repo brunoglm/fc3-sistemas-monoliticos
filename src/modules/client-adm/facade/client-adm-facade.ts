@@ -1,5 +1,3 @@
-import AddClientUseCase from '../usecase/add-client/add-client-usecase'
-import FindClientUseCase from '../usecase/find-client/find-client-usecase'
 import UseCaseInterface from '../../@shared/usecase/use-case-interface'
 import ClientAdmFacadeInterface, {
   AddClientFacadeInputDto,

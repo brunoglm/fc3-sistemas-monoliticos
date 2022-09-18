@@ -1,8 +1,8 @@
 import invoiceEntity from '../domain/entity/invoice-entity'
 import InvoiceGateway from '../gateway/invoice-gateway'
 import { InvoiceModel } from './model/invoice-model'
-import { ProductModel } from './model/product-model'
 import InvoiceFactory from '../domain/factory/invoice-factory'
+import { InvoiceProductModel } from './model/invoice-product-model'
 
 export default class InvoiceRepository implements InvoiceGateway {
   async generate(invoice: invoiceEntity): Promise<void> {
@@ -26,7 +26,7 @@ export default class InvoiceRepository implements InvoiceGateway {
         updatedAt: invoice.updatedAt || new Date(),
       },
       {
-        include: [{ model: ProductModel }],
+        include: [{ model: InvoiceProductModel }],
       }
     )
   }

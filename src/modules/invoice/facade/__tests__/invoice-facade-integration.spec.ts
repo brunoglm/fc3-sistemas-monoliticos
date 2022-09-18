@@ -1,5 +1,5 @@
 import { Sequelize } from 'sequelize-typescript'
-import { ProductModel } from '../../repository/model/product-model'
+import { InvoiceProductModel } from '../../repository/model/invoice-product-model'
 import { InvoiceModel } from '../../repository/model/invoice-model'
 import InvoiceFacadeFactory from '../factory/invoice-facade-factory'
 import InvoiceFactory from '../../domain/factory/invoice-factory'
@@ -15,7 +15,7 @@ describe('InvoiceFacade integration tests', () => {
       sync: { force: true },
     })
 
-    sequelize.addModels([InvoiceModel, ProductModel])
+    sequelize.addModels([InvoiceModel, InvoiceProductModel])
     await sequelize.sync()
   })
 
@@ -117,7 +117,7 @@ describe('InvoiceFacade integration tests', () => {
         updatedAt: invoice.updatedAt,
       },
       {
-        include: [{ model: ProductModel }],
+        include: [{ model: InvoiceProductModel }],
       }
     )
 

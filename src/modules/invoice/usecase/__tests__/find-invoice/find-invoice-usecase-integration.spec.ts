@@ -2,7 +2,7 @@ import FindInvoiceUseCase from '../../find-invoice/find-invoice-usecase'
 import InvoiceFactory from '../../../domain/factory/invoice-factory'
 import InvoiceRepository from '../../../repository/invoice-repository'
 import { InvoiceModel } from '../../../repository/model/invoice-model'
-import { ProductModel } from '../../../repository/model/product-model'
+import { InvoiceProductModel } from '../../../repository/model/invoice-product-model'
 import { Sequelize } from 'sequelize-typescript'
 
 describe('Find invoice usecase unit test', () => {
@@ -16,7 +16,7 @@ describe('Find invoice usecase unit test', () => {
       sync: { force: true },
     })
 
-    sequelize.addModels([InvoiceModel, ProductModel])
+    sequelize.addModels([InvoiceModel, InvoiceProductModel])
     await sequelize.sync()
   })
 
@@ -74,7 +74,7 @@ describe('Find invoice usecase unit test', () => {
         updatedAt: invoice.updatedAt,
       },
       {
-        include: [{ model: ProductModel }],
+        include: [{ model: InvoiceProductModel }],
       }
     )
 

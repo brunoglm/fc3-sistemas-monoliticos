@@ -2,7 +2,7 @@ import { Sequelize } from 'sequelize-typescript'
 import InvoiceFactory from '../../domain/factory/invoice-factory'
 import { InvoiceModel } from '../model/invoice-model'
 import InvoiceRepository from '../invoice-repository'
-import { ProductModel } from '../model/product-model'
+import { InvoiceProductModel } from '../model/invoice-product-model'
 
 describe('InvoiceRepository integration test', () => {
   let sequelize: Sequelize
@@ -15,7 +15,7 @@ describe('InvoiceRepository integration test', () => {
       sync: { force: true },
     })
 
-    sequelize.addModels([InvoiceModel, ProductModel])
+    sequelize.addModels([InvoiceModel, InvoiceProductModel])
     await sequelize.sync()
   })
 
@@ -124,7 +124,7 @@ describe('InvoiceRepository integration test', () => {
         updatedAt: new Date(),
       },
       {
-        include: [{ model: ProductModel }],
+        include: [{ model: InvoiceProductModel }],
       }
     )
 

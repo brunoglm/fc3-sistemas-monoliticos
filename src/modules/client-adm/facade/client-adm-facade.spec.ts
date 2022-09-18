@@ -1,9 +1,5 @@
 import { Sequelize } from 'sequelize-typescript'
 import { ClientModel } from '../repository/client-model'
-import ClientRepository from '../repository/client-repository'
-import AddClientUseCase from '../usecase/add-client/add-client-usecase'
-import ClientAdmFacade from './client-adm-facade'
-import FindClientUseCase from '../usecase/find-client/find-client-usecase'
 import ClientAdmFacadeFactory from '../factory/client-adm-facade-factory'
 
 describe('ClientAdmFacade test', () => {
@@ -32,7 +28,15 @@ describe('ClientAdmFacade test', () => {
       id: '1',
       name: 'Client 1',
       email: 'x@x.com',
-      address: 'Address 1',
+      document: 'document',
+      address: {
+        street: 'street',
+        number: 'number',
+        complement: 'complement',
+        city: 'city',
+        state: 'state',
+        zipCode: 'zipcode',
+      },
     }
 
     await facade.add(input)
@@ -42,7 +46,13 @@ describe('ClientAdmFacade test', () => {
     expect(result).toBeDefined()
     expect(result.name).toEqual(input.name)
     expect(result.email).toEqual(input.email)
-    expect(result.address).toEqual(input.address)
+    expect(result.document).toEqual(input.document)
+    expect(result.street).toEqual(input.address.street)
+    expect(result.number).toEqual(input.address.number)
+    expect(result.zipCode).toEqual(input.address.zipCode)
+    expect(result.state).toEqual(input.address.state)
+    expect(result.complement).toEqual(input.address.complement)
+    expect(result.city).toEqual(input.address.city)
   })
 
   it('should find a client', async () => {
@@ -52,7 +62,13 @@ describe('ClientAdmFacade test', () => {
       id: '1',
       name: 'Client 1',
       email: 'x@x.com',
-      address: 'Adress 1',
+      document: 'document',
+      street: 'street',
+      number: 'number',
+      complement: 'complement',
+      city: 'city',
+      state: 'state',
+      zipCode: 'zipcode',
       createdAt: new Date(),
       updatedAt: new Date(),
     })
@@ -63,6 +79,11 @@ describe('ClientAdmFacade test', () => {
     expect(result.id).toEqual(client.id)
     expect(result.name).toEqual(client.name)
     expect(result.email).toEqual(client.email)
-    expect(result.address).toEqual(client.address)
+    expect(result.address.street).toEqual(client.street)
+    expect(result.address.number).toEqual(client.number)
+    expect(result.address.zipCode).toEqual(client.zipCode)
+    expect(result.address.state).toEqual(client.state)
+    expect(result.address.complement).toEqual(client.complement)
+    expect(result.address.city).toEqual(client.city)
   })
 })

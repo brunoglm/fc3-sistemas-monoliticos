@@ -2,7 +2,7 @@ import GenerateInvoiceUseCase from '../../generate-invoice/generate-invoice-usec
 import InvoiceRepository from '../../../repository/invoice-repository'
 import { Sequelize } from 'sequelize-typescript'
 import { InvoiceModel } from '../../../repository/model/invoice-model'
-import { ProductModel } from '../../../repository/model/product-model'
+import { InvoiceProductModel } from '../../../repository/model/invoice-product-model'
 
 describe('Generate invoice usecase unit test', () => {
   let sequelize: Sequelize
@@ -15,7 +15,7 @@ describe('Generate invoice usecase unit test', () => {
       sync: { force: true },
     })
 
-    sequelize.addModels([InvoiceModel, ProductModel])
+    sequelize.addModels([InvoiceModel, InvoiceProductModel])
     await sequelize.sync()
   })
 
